@@ -1,0 +1,304 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@layer utilities {
+  .dark-mode {
+    color-scheme: dark;
+  }
+
+  /* Modern gradient backgrounds */
+  .gradient-primary {
+    background: linear-gradient(
+      135deg,
+      var(--primary) 0%,
+      var(--primary-accent) 100%
+    );
+  }
+
+  .gradient-secondary {
+    background: linear-gradient(
+      135deg,
+      var(--secondary) 0%,
+      var(--secondary-accent) 100%
+    );
+  }
+
+  /* Glass morphism effects */
+  .glass {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  }
+
+  .glass-dark {
+    background: rgba(15, 23, 42, 0.7);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  }
+
+  /* Authentication pages background gradients */
+  .bg-auth-login {
+    background: linear-gradient(
+      135deg,
+      rgba(var(--primary-rgb), 0.15) 0%,
+      rgba(255, 255, 255, 0.05) 50%,
+      rgba(var(--secondary-rgb), 0.15) 100%
+    );
+  }
+
+  .bg-auth-register {
+    background: linear-gradient(
+      135deg,
+      rgba(var(--accent-rgb), 0.15) 0%,
+      rgba(255, 255, 255, 0.05) 50%,
+      rgba(var(--primary-rgb), 0.15) 100%
+    );
+  }
+
+  /* Animated hover effects */
+  .hover-scale {
+    transition: transform 0.2s ease-in-out;
+  }
+
+  .hover-scale:hover {
+    transform: scale(1.03);
+  }
+
+  /* Micro-interactions */
+  .pulse {
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0% {
+      box-shadow: 0 0 0 0 rgba(var(--primary-rgb), 0.4);
+    }
+    70% {
+      box-shadow: 0 0 0 10px rgba(var(--primary-rgb), 0);
+    }
+    100% {
+      box-shadow: 0 0 0 0 rgba(var(--primary-rgb), 0);
+    }
+  }
+}
+
+@layer base {
+  :root {
+    /* Modern color palette */
+    --background: hsl(0, 0%, 100%);
+    --foreground: hsl(222, 47%, 11%);
+
+    /* Card colors */
+    --card: hsl(0, 0%, 100%);
+    --card-foreground: hsl(222, 47%, 11%);
+
+    /* Popover colors */
+    --popover: hsl(0, 0%, 100%);
+    --popover-foreground: hsl(222, 47%, 11%);
+
+    /* Primary colors - vibrant blue with modern tint */
+    --primary: hsl(222, 85%, 54%);
+    --primary-accent: hsl(250, 85%, 64%);
+    --primary-rgb: 44, 111, 255;
+    --primary-foreground: hsl(210, 40%, 98%);
+
+    /* Secondary colors - soft neutral */
+    --secondary: hsl(210, 40%, 96.1%);
+    --secondary-accent: hsl(220, 35%, 90%);
+    --secondary-foreground: hsl(222, 47%, 11.2%);
+
+    /* Muted colors */
+    --muted: hsl(210, 40%, 96.1%);
+    --muted-foreground: hsl(215, 16%, 46.9%);
+
+    /* Accent colors - teal green for variety */
+    --accent: hsl(175, 84%, 45%);
+    --accent-rgb: 31, 217, 207;
+    --accent-foreground: hsl(0, 0%, 100%);
+
+    /* Destructive colors - warm red */
+    --destructive: hsl(0, 84%, 60%);
+    --destructive-foreground: hsl(210, 40%, 98%);
+
+    /* Border colors */
+    --border: hsl(214.3, 31.8%, 91.4%);
+
+    /* Input colors */
+    --input: hsl(214.3, 31.8%, 91.4%);
+
+    /* Ring focus colors */
+    --ring: hsl(222, 85%, 63%);
+    --ring-rgb: 62, 116, 226;
+
+    /* Border radius */
+    --radius: 0.65rem;
+
+    /* Additional theme variables */
+    --radius-sm: calc(var(--radius) - 4px);
+    --radius-md: calc(var(--radius) - 2px);
+    --radius-lg: var(--radius);
+    --radius-xl: calc(var(--radius) + 4px);
+    --color-background: var(--background);
+    --color-foreground: var(--foreground);
+    --color-card: var(--card);
+    --color-card-foreground: var(--card-foreground);
+    --color-popover: var(--popover);
+    --color-popover-foreground: var(--popover-foreground);
+    --color-primary: var(--primary);
+    --color-primary-foreground: var(--primary-foreground);
+    --color-secondary: var(--secondary);
+    --color-secondary-foreground: var(--secondary-foreground);
+    --color-muted: var(--muted);
+    --color-muted-foreground: var(--muted-foreground);
+    --color-accent: var(--accent);
+    --color-accent-foreground: var(--accent-foreground);
+    --color-destructive: var(--destructive);
+    --color-border: var(--border);
+    --color-input: var(--input);
+    --color-ring: var(--ring);
+
+    /* Shadow variables */
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.05),
+      0 2px 4px -1px rgba(0, 0, 0, 0.03);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.05),
+      0 4px 6px -2px rgba(0, 0, 0, 0.025);
+    --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.05),
+      0 10px 10px -5px rgba(0, 0, 0, 0.01);
+  }
+
+  .dark {
+    --background: hsl(222, 47%, 7%);
+    --foreground: hsl(210, 40%, 98%);
+
+    /* Card colors */
+    --card: hsl(222, 47%, 10%);
+    --card-foreground: hsl(210, 40%, 98%);
+
+    /* Popover colors */
+    --popover: hsl(222, 47%, 9%);
+    --popover-foreground: hsl(210, 40%, 98%);
+
+    /* Primary colors - brighter in dark mode */
+    --primary: hsl(222, 85%, 60%);
+    --primary-accent: hsl(250, 85%, 70%);
+    --primary-rgb: 61, 134, 255;
+    --primary-foreground: hsl(222, 47%, 11.2%);
+
+    /* Secondary colors */
+    --secondary: hsl(217, 32%, 17.5%);
+    --secondary-accent: hsl(217, 32%, 25%);
+    --secondary-foreground: hsl(210, 40%, 98%);
+
+    /* Muted colors */
+    --muted: hsl(217, 32%, 17.5%);
+    --muted-foreground: hsl(215, 20%, 65.1%);
+
+    /* Accent colors - brighter in dark mode */
+    --accent: hsl(175, 84%, 50%);
+    --accent-rgb: 43, 226, 217;
+    --accent-foreground: hsl(222, 47%, 11.2%);
+
+    /* Destructive colors */
+    --destructive: hsl(0, 62%, 55%);
+    --destructive-foreground: hsl(210, 40%, 98%);
+
+    /* Border colors */
+    --border: hsl(217, 32%, 17.5%);
+
+    /* Input colors */
+    --input: hsl(217, 32%, 20%);
+
+    /* Ring focus colors */
+    --ring: hsl(224, 76%, 58%);
+    --ring-rgb: 83, 130, 231;
+
+    /* Shadow variables - darker for dark mode */
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.3),
+      0 2px 4px -1px rgba(0, 0, 0, 0.18);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.3),
+      0 4px 6px -2px rgba(0, 0, 0, 0.15);
+    --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.3),
+      0 10px 10px -5px rgba(0, 0, 0, 0.06);
+  }
+
+  /* Base styles for form elements */
+  input,
+  textarea,
+  select {
+    border-width: 1px !important;
+    border-style: solid;
+    border-color: var(--border);
+    transition: all 0.2s ease;
+    background-color: rgba(255, 255, 255, 0.03);
+  }
+
+  /* Standardize focus styles across form elements */
+  input:focus-visible,
+  textarea:focus-visible,
+  select:focus-visible,
+  button:focus-visible {
+    outline: none !important;
+    border-color: var(--ring) !important;
+    border-width: 1px !important;
+    box-shadow: 0 0 0 3px rgba(var(--ring-rgb), 0.15) !important;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* Enhanced form element hover state */
+  input:hover:not(:disabled),
+  textarea:hover:not(:disabled),
+  select:hover:not(:disabled) {
+    border-color: rgba(var(--ring-rgb), 0.5) !important;
+  }
+
+  /* Remove any browser default focus styles */
+  :focus {
+    outline: none !important;
+  }
+
+  /* Fix any browser defaults that might interfere */
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* Modern scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: var(--secondary);
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: rgba(var(--primary-rgb), 0.6);
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(var(--primary-rgb), 0.8);
+  }
+}
+
+/* 
+* These styles are now handled in the tailwind.config.js plugins section to avoid lint errors
+* with the @apply directive
+*/
+/*
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+*/
